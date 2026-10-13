@@ -6,13 +6,17 @@ abstract class CGRFormViewModel<T> extends CGRViewModel<T> {
 
   final CGRRepository<T> repository;
 
+  bool get isEdit;
+
   T prepareItem();
 
   Future<void> save() async {
     try {
       loading();
       final item = prepareItem();
-      await repository.create(item: item);
+      await (isEdit
+          ? repository.update(item: item)
+          : repository.create(item: item));
       success();
     } catch (e) {
       error();

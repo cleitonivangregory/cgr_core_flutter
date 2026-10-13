@@ -5,13 +5,15 @@ class CGRListScreen extends StatefulWidget {
     super.key,
     required this.title,
     required this.viewModel,
-    required this.nextScreen,
+    required this.newScreen,
+    required this.editScreen,
     required this.itemBuilder,
   });
 
   final String title;
   final CGRListViewModel viewModel;
-  final String nextScreen;
+  final String newScreen;
+  final String editScreen;
   final Widget Function(BuildContext context, int index) itemBuilder;
 
   @override
@@ -37,7 +39,7 @@ class _CGRListScreenState extends State<CGRListScreen> {
       bottomNavigationBar: CGRInfinityButton(
         label: 'Adicionar',
         onPressed: () async {
-          await context.push(widget.nextScreen);
+          await context.push(widget.newScreen);
           widget.viewModel.load();
         },
       ),
@@ -59,7 +61,10 @@ class _CGRListScreenState extends State<CGRListScreen> {
           itemBuilder: (context, index) {
             final item = widget.viewModel.items[index];
             return InkWell(
-              onTap: () {},
+              onTap: () async {
+                await context.push(widget.editScreen, extra: item);
+                widget.viewModel.load();
+              },
               onLongPress: () {
                 widget.viewModel.remove(item: item);
               },

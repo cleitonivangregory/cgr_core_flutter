@@ -3,12 +3,10 @@ import 'package:cgr_core_flutter/cgr_core_flutter.dart';
 class CGRFormScreen extends StatelessWidget {
   new({
     super.key,
-    required this.title,
     required this.viewModel,
     required this.children,
   });
 
-  final String title;
   final CGRFormViewModel viewModel;
   final List<Widget> children;
   final _formKey = GlobalKey<FormState>();
@@ -16,7 +14,7 @@ class CGRFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(viewModel.isEdit ? 'Editar' : 'Novo')),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(child: Column(children: children)),
