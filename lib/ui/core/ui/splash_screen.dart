@@ -38,6 +38,8 @@ class _CGRSplashScreenState extends State<CGRSplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: .spaceBetween,
@@ -51,22 +53,22 @@ class _CGRSplashScreenState extends State<CGRSplashScreen> {
                   height: 112,
                   alignment: .center,
                   decoration: BoxDecoration(
-                    color: Colors.amber,
+                    color: colors.primary,
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Text(
                     widget.acronym,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: .bold,
-                    ),
+                    // style: TextStyle(
+                    //   color: colors.onPrimary,
+                    //   fontSize: 20,
+                    //   fontWeight: .bold,
+                    // ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
                   widget.appName,
-                  style: const TextStyle(fontSize: 20, fontWeight: .w600),
+                  // style: const TextStyle(fontSize: 20, fontWeight: .w600),
                 ),
                 const SizedBox(height: 32),
               ],
@@ -75,12 +77,15 @@ class _CGRSplashScreenState extends State<CGRSplashScreen> {
           ListenableBuilder(
             listenable: viewModel,
             builder: (context, child) {
-              return LinearProgressIndicator(
-                value: viewModel.progress,
-                minHeight: 25,
-                backgroundColor: Colors.grey.shade300,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.amber),
-                borderRadius: BorderRadius.circular(10),
+              return Padding(
+                padding: .symmetric(horizontal: 8, vertical: 4),
+                child: LinearProgressIndicator(
+                  value: viewModel.progress,
+                  minHeight: 25,
+                  // backgroundColor: Colors.grey.shade300,
+                  // valueColor: AlwaysStoppedAnimation<Color>(colors.primary),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               );
             },
           ),
