@@ -1,6 +1,6 @@
 import 'package:cgr_core_flutter/cgr_core_flutter.dart';
 
-class CGRBottomButton extends StatelessWidget {
+class CGRInfinityButton extends StatelessWidget {
   const new({super.key, required this.label, this.onPressed});
 
   final String label;

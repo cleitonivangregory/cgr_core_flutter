@@ -9,7 +9,7 @@ class CGRWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: Text('Welcome')),
-      bottomNavigationBar: CGRBottomButton(
+      bottomNavigationBar: CGRInfinityButton(
         label: 'Continuar',
         onPressed: () => context.go(nextScreen),
       ),

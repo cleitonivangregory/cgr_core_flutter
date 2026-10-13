@@ -22,7 +22,7 @@ abstract class CGRListViewModel<T> extends CGRViewModel<T> {
     try {
       loading();
       await repository.delete(item: item);
-      success();
+      load();
     } catch (e) {
       error();
     }
