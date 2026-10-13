@@ -1,22 +1,24 @@
 import 'package:cgr_core_flutter/cgr_core_flutter.dart';
 
-class CGRListScreen<T> extends StatefulWidget {
+class CGRListScreen extends StatefulWidget {
   const new({
     super.key,
     required this.title,
     required this.viewModel,
     required this.nextScreen,
+    required this.itemBuilder,
   });
 
   final String title;
   final CGRListViewModel viewModel;
   final String nextScreen;
+  final Widget Function(BuildContext context, int index) itemBuilder;
 
   @override
-  State<CGRListScreen<T>> createState() => _CGRListScreenState<T>();
+  State<CGRListScreen> createState() => _CGRListScreenState();
 }
 
-class _CGRListScreenState<T> extends State<CGRListScreen<T>> {
+class _CGRListScreenState extends State<CGRListScreen> {
   @override
   void initState() {
     super.initState();
@@ -56,14 +58,12 @@ class _CGRListScreenState<T> extends State<CGRListScreen<T>> {
           itemCount: widget.viewModel.items.length,
           itemBuilder: (context, index) {
             final item = widget.viewModel.items[index];
-            return Card(
-              child: ListTile(
-                onTap: () {},
-                onLongPress: () {
-                  widget.viewModel.remove(item: item);
-                },
-                leading: Text('$index'),
-              ),
+            return InkWell(
+              onTap: () {},
+              onLongPress: () {
+                widget.viewModel.remove(item: item);
+              },
+              child: Card(child: widget.itemBuilder(context, index)),
             );
           },
         ),
