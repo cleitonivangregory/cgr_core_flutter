@@ -1,4 +1,5 @@
 import 'package:cgr_core_flutter/cgr_core_flutter.dart';
+import 'package:cgr_core_flutter/ui/core/view_models/theme_view_model.dart';
 
 class CGRApp extends StatelessWidget {
   const new({
@@ -14,12 +15,19 @@ class CGRApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      darkTheme: darkTheme,
-      themeMode: .system,
-      routerConfig: routerConfig,
+    return ChangeNotifierProvider(
+      create: (context) => CGRThemeViewModel(),
+      child: Builder(
+        builder: (context) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            darkTheme: darkTheme,
+            themeMode: context.watch<CGRThemeViewModel>().themeMode,
+            routerConfig: routerConfig,
+          );
+        },
+      ),
     );
   }
 }

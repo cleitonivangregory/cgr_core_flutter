@@ -1,5 +1,6 @@
 export 'package:go_router/go_router.dart';
 export 'package:material_ui/material_ui.dart';
+export 'package:provider/provider.dart';
 
 export 'data/_exports.dart';
 export 'domain/_exports.dart';
